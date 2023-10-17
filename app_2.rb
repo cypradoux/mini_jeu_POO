@@ -16,13 +16,12 @@ puts "Le joueur #{name} a été créé"
 
 player1 = Player.new("Joséphine")
 player2 = Player.new("José")
-enemies =[]
-enemies << [player1, player2]
+enemies = [player1, player2]
 
 puts "Deux ennemis ont été créé, #{player1.name} et #{player2.name}"
 
 while player1.life_points > 0 || player2.life_points > 0 && player3.life_points > 0
-    puts "Voici l'état des deux joueurs :"
+    puts "Voici l'état des joueurs :"
     puts
     puts player1.show_state
     puts player2.show_state
@@ -35,14 +34,19 @@ while player1.life_points > 0 || player2.life_points > 0 && player3.life_points 
             break
         else
             puts "Les ennemis t'attaquent !"
-            enemies.each do |player|
-            player.attacks(player3)
+            enemies.each do |enemie|
+                if enemie.life_points >= 0
+                    enemie.attacks(player3)
+                    puts
+                else
+                end
             end
         end
 
         if player3.life_points <= 0
             break
         else
+            puts
             puts "Quelle action veux-tu effectuer ?"
             puts "a - Chercher une meilleure arme"
             puts "s - Chercher à se soigner"
@@ -52,6 +56,7 @@ while player1.life_points > 0 || player2.life_points > 0 && player3.life_points 
             print "1 - " 
             puts player2.show_state.to_s
             answer = gets.chomp.to_s
+            puts
             if answer == "a"
                 player3.search_weapon
             elsif answer == "s"
@@ -63,13 +68,15 @@ while player1.life_points > 0 || player2.life_points > 0 && player3.life_points 
             else
                 puts "Saisi une des commandes (a ; s ; 0 ; 1)"
             end
-            #puts player3.attacks(player2)
+            puts gets.chomp
         end
 end
 
 puts "La partie est terminée"
 
 if player3.life_points > 0
-    puts "Bravo tu as gagné la partie !!"
+    puts "████████████████████████████████████████████████████████████████████████"
+    puts "███████████████████Bravo tu as gagné la partie !!███████████████████████"
+    puts "████████████████████████████████████████████████████████████████████████"
 else puts "Loser, tu as perdu pauvre naze !"
 end
